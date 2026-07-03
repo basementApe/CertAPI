@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj": {}
+    "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj": {}
   },
   "projects": {
-    "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj": {
+    "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj",
+        "projectUniqueName": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj",
         "projectName": "CertAPI",
-        "projectPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj",
+        "projectPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj",
         "packagesPath": "/home/erikthon/.nuget/packages/",
-        "outputPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/",
+        "outputPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/erikthon/.nuget/NuGet/NuGet.Config"
@@ -45,6 +45,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.79, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.9, )"

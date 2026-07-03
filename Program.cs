@@ -3,6 +3,7 @@ using CertAPI;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ICertificateRepo, JsonCertificateRepo>();     // Change to SQL or something later
+builder.Services.AddSingleton<CertManager>();
 
 // builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -24,8 +25,18 @@ app.MapGet("/api/test", (ICertificateRepo repo) =>
 
 app.MapPost("/api/cert", (Certificate certificate, ICertificateRepo repo) =>
 {
-    repo.SaveCerts(certificate);
+    repo.SaveCert(certificate);
     return Results.Created("/api/cert", certificate);
+});
+
+app.MapGet("/api/searchtype", (string type, CertManager manager) =>
+{
+    return manager.GetByType(type);
+});
+
+app.MapGet("/api/searchnumber", (int number, CertManager manager) =>
+{
+    return manager.GetByNumber(number);
 });
 
 app.UseStaticFiles();   // enable html

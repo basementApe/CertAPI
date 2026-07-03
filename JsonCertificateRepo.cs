@@ -16,7 +16,7 @@ namespace CertAPI
             return JsonSerializer.Deserialize<List<Certificate>>(json);
         }
 
-        public void SaveCerts(Certificate certificate)
+        public void SaveCert(Certificate certificate)
         {
             var certs = LoadCerts();
 

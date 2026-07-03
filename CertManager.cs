@@ -2,20 +2,22 @@ namespace CertAPI
 {
     public class CertManager
     {
-        private readonly List<Certificate> _certificates = [];
+        private readonly ICertificateRepo _repo;
 
-        public List<Certificate> GetAll() => new List<Certificate>(_certificates);      // return a copy instead of the actual list so _certificates itself remains protected
-
-        public List<Certificate> GetByNumber()
+        public CertManager(ICertificateRepo repo)
         {
-            var list = GetAll();
-            return list;
+            _repo = repo;
         }
 
-        public List<Certificate> GetByType()
+
+        public List<Certificate> GetByNumber(int number)
         {
-            var list = GetAll();
-            return list;
+            return _repo.LoadCerts().Where(c => c.Number == number).ToList();
+        }
+
+        public List<Certificate> GetByType(string type)
+        {
+            return _repo.LoadCerts().Where(c => c.Type.Contains(type, StringComparison.OrdinalIgnoreCase)).ToList();
         }
     }
 }
