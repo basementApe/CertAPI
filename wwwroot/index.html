@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <h1>Hei</h1>
+
+        <input placeholder="Type" oninput="model.inputs.type = this.value; console.log(model.inputs.type);">
+        <input placeholder="Number" oninput="model.inputs.number = this.value; console.log(model.inputs.number.toString());">
+        <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value; console.log(model.inputs.notifiedbody);">
+        <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value; console.log(model.inputs.issueDate);">
+        <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.expiryDate = this.value; console.log(model.inputs.expiryDate);">
+
+        <button onclick="SubmitAll()">Submit</button>
+
+        <script>
+            var model = 
+            {
+                inputs:
+                {
+                    type: "",
+                    number: null,
+                    notifiedbody: "",
+                    issueDate: "",
+                    expiryDate: "",
+                }
+            }
+
+            GetData();
+            async function GetData()
+            {
+                const response = await axios.get("/api/test");
+                console.log(response.data);
+            }
+
+            async function PostData(cert)
+            {
+                const msg = await axios.post("/api/cert", cert);
+            }
+
+            function SubmitAll()
+            {
+                if (InvalidInput())
+                {
+                    alert("All fields must be filled in.");
+                    return;
+                }
+
+                const cert = 
+                {
+                    type: model.inputs.type,
+                    number: model.inputs.number,
+                    notifiedBody: model.inputs.notifiedbody,
+                    issueDate: model.inputs.issueDate,
+                    expiryDate: model.inputs.expiryDate,
+                }
+
+                PostData(cert);
+                EmptyInputs();
+            }
+
+            function InvalidInput()
+            {
+                return model.inputs.type == "" || model.inputs.number == null || model.inputs.notifiedbody == "" || model.inputs.issueDate == "" || model.inputs.expiryDate == "";
+            }
+
+            function EmptyInputs()
+            {
+                model.inputs.type = "";
+                model.inputs.number = null;
+                model.inputs.notifiedbody = "";
+                model.inputs.issueDate = "";
+                model.inputs.expiryDate = "";
+            }
+
+        </script>
+    </body>
+</html>
