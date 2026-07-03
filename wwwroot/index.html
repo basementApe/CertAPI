@@ -4,16 +4,7 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     <body>
-        <h1>Hei</h1>
-
-        <input placeholder="Type" oninput="model.inputs.type = this.value; console.log(model.inputs.type);">
-        <input placeholder="Number" oninput="model.inputs.number = this.value; console.log(model.inputs.number.toString());">
-        <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value; console.log(model.inputs.notifiedbody);">
-        <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value; console.log(model.inputs.issueDate);">
-        <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.expiryDate = this.value; console.log(model.inputs.expiryDate);">
-
-        <button onclick="SubmitAll()">Submit</button>
-
+        <div id="app"></div>
         <script>
             var model = 
             {
@@ -28,6 +19,8 @@
             }
 
             GetData();
+            updateView();
+
             async function GetData()
             {
                 const response = await axios.get("/api/test");
@@ -37,6 +30,26 @@
             async function PostData(cert)
             {
                 const msg = await axios.post("/api/cert", cert);
+            }
+
+            function updateView()
+            {
+                document.getElementById("app").innerHTML = mainPageHTML();
+            }
+
+            function mainPageHTML()
+            {
+                return /*HTML*/ `
+                    <h1>Certificates</h1>
+
+                    <input placeholder="Type" oninput="model.inputs.type = this.value; console.log(model.inputs.type);">
+                    <input placeholder="Number" oninput="model.inputs.number = this.value; console.log(model.inputs.number.toString());">
+                    <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value; console.log(model.inputs.notifiedbody);">
+                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value; console.log(model.inputs.issueDate);">
+                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.expiryDate = this.value; console.log(model.inputs.expiryDate);">
+
+                    <button onclick="SubmitAll()">Submit</button>
+                `;
             }
 
             function SubmitAll()
@@ -58,6 +71,7 @@
 
                 PostData(cert);
                 EmptyInputs();
+                updateView();
             }
 
             function InvalidInput()

@@ -25,7 +25,7 @@ app.MapGet("/api/test", (ICertificateRepo repo) =>
 app.MapPost("/api/cert", (Certificate certificate, ICertificateRepo repo) =>
 {
     repo.SaveCerts(certificate);
-    return Results.Created("/api/test", certificate);
+    return Results.Created("/api/cert", certificate);
 });
 
 app.UseStaticFiles();   // enable html

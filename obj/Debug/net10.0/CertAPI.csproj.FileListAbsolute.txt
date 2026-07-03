@@ -35,4 +35,5 @@
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/CertAPI.pdb
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/CertAPI.genruntimeconfig.cache
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/ref/CertAPI.dll
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-fx123asi50-fx123asi50.gz
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/CertAPI.sourcelink.json
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-zfnv6tg4nt-zfnv6tg4nt.gz
