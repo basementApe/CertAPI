@@ -48,6 +48,23 @@ app.MapPost("/api/cert", async (HttpRequest request, ICertificateRepo repo) =>
     return Results.Created("/api/cert", certificate);
 });
 
+app.MapGet("/api/cert/{number}/download", (string number, ICertificateRepo repo) =>
+{
+    var cert = repo.LoadCerts().FirstOrDefault(c => c.Number == number);
+
+    if (cert == null)
+        return Results.NotFound("Certificate not found");
+
+    var path = Path.Combine("Uploads", cert.StoredFileName);
+
+    if (!File.Exists(path))
+        return Results.NotFound("File missing on server");
+
+    var fileBytes = File.ReadAllBytes(path);
+
+    return Results.File(fileBytes, "application/pdf", cert.Number + ".pdf");
+});
+
 app.MapGet("/api/searchtype", (string type, CertManager manager) =>
 {
     return manager.GetByType(type);
