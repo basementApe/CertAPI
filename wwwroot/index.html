@@ -2,9 +2,6 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/model.js"></script>
-        <script src="/controller.js"></script>
-        <script src="/view.js"></script>
     </head>
     <body>
         <div id="app"></div>
@@ -44,10 +41,10 @@
                 model.fullCertificateList = response.data;
             }
 
-            async function PostData(cert) 
-            {
-                const msg = await axios.post("/api/cert", cert);
-            }
+            // async function PostData(cert) 
+            // {
+            //     const msg = await axios.post("/api/cert", cert);
+            // }
 
             async function SearchByType() 
             {
@@ -77,18 +74,26 @@
                     return;
                 }
 
-                const cert =
-                {
-                    type: model.inputs.type,
-                    number: model.inputs.number,
-                    notifiedBody: model.inputs.notifiedbody,
-                    issueDate: model.inputs.issueDate,
-                    expiryDate: model.inputs.expiryDate,
+                const file = document.getElementById("fileInput").files[0];
+
+                if (!file) {
+                    alert("Please select a certificate file.");
+                    return;
                 }
 
-                await PostData(cert);
+                const formData = new FormData();
+
+                formData.append("type", model.inputs.type);
+                formData.append("number", model.inputs.number);
+                formData.append("notifiedBody", model.inputs.notifiedbody);
+                formData.append("issueDate", model.inputs.issueDate);
+                formData.append("expiryDate", model.inputs.expiryDate);
+
+                formData.append("file", file);
+
+                await axios.post("/api/cert", formData);
+
                 ClearInputs();
-                ClearSearches();
                 await GetData();
                 updateView();
             }
@@ -118,7 +123,7 @@
             function mainPageHTML() 
             {
                 return /*HTML*/ `
-                    <h1>Certificates</h1>
+                    <h2>Certificates</h2>
 
                     <input placeholder="Type" oninput="model.inputs.type = this.value">
                     <input placeholder="Number" oninput="model.inputs.number = this.value">
@@ -130,7 +135,7 @@
                     <button onclick="SubmitAll()">Submit</button>
 
                     <br>
-                    Search certificates:
+                    <h3>Search certificates:</h3>
                     <input placeholder="Certificate type" oninput="model.searchByType = this.value">
                     <button onclick="SearchByType()">Search by type</button>
                     <input placeholder="Certificate number" oninput="model.searchByNumber = this.value">

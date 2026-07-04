@@ -79,7 +79,4 @@
 /home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-ook14jy25o-ook14jy25o.gz
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/bin/Debug/net10.0/certificates.json
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/bin/Debug/net10.0/Dapper.dll
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/3fmxtkyvh4-{0}-9viixu5puz-9viixu5puz.gz
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/ksqggtpxzm-{0}-ic8wpa77vj-ic8wpa77vj.gz
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/75kgeqddb1-{0}-c901r7kprd-c901r7kprd.gz
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-3grforlkag-3grforlkag.gz
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-8ygcnmm2ye-8ygcnmm2ye.gz
