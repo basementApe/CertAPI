@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapGet("/api/test", (ICertificateRepo repo) => 
+app.MapGet("/api/completelist", (ICertificateRepo repo) => 
 {
     return repo.LoadCerts();
 });
@@ -34,7 +34,7 @@ app.MapGet("/api/searchtype", (string type, CertManager manager) =>
     return manager.GetByType(type);
 });
 
-app.MapGet("/api/searchnumber", (int number, CertManager manager) =>
+app.MapGet("/api/searchnumber", (string number, CertManager manager) =>
 {
     return manager.GetByNumber(number);
 });

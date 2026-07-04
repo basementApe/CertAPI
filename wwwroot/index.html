@@ -2,57 +2,131 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/model.js"></script>
+        <script src="/controller.js"></script>
+        <script src="/view.js"></script>
     </head>
     <body>
         <div id="app"></div>
         <script>
+
+            (async function init() {
+                await GetData();
+                updateView();
+            })();
+
+            // model
             var model = 
             {
                 inputs:
                 {
                     type: "",
-                    number: null,
+                    number: "",
                     notifiedbody: "",
                     issueDate: "",
                     expiryDate: "",
                 },
 
                 searchByType: "",
-                searchByNumber: -1,
+                searchByNumber: "",
 
                 searchResults: [],
+
+                fullCertificateList: [],
             }
 
-            GetData();
-            updateView();
 
-            async function GetData()
+            // controller
+
+            async function GetData() 
             {
-                const response = await axios.get("/api/test");
-                console.log(response.data);
+                const response = await axios.get("/api/completelist");
+                model.fullCertificateList = response.data;
             }
 
-            async function PostData(cert)
+            async function PostData(cert) 
             {
                 const msg = await axios.post("/api/cert", cert);
             }
 
-            function updateView()
+            async function SearchByType() 
+            {
+                const response = await axios.get("/api/searchtype", { params: { type: model.searchByType } });
+                model.searchResults = response.data;
+                updateView();
+            }
+
+            async function SearchByNumber() 
+            {
+                const response = await axios.get("/api/searchnumber", { params: { number: model.searchByNumber } });
+                model.searchResults = response.data;
+                updateView();
+            }
+
+            function ClearSearches()
+            {
+                model.searchByType = "";
+                model.searchByNumber = "";
+            }
+
+            async function SubmitAll()
+            {
+                if (InvalidInput()) 
+                {
+                    alert("All fields must be filled in.");
+                    return;
+                }
+
+                const cert =
+                {
+                    type: model.inputs.type,
+                    number: model.inputs.number,
+                    notifiedBody: model.inputs.notifiedbody,
+                    issueDate: model.inputs.issueDate,
+                    expiryDate: model.inputs.expiryDate,
+                }
+
+                await PostData(cert);
+                ClearInputs();
+                ClearSearches();
+                await GetData();
+                updateView();
+            }
+
+            function InvalidInput() 
+            {
+                return model.inputs.type == "" || model.inputs.number == "" || model.inputs.notifiedbody == "" || model.inputs.issueDate == "" || model.inputs.expiryDate == "";
+            }
+
+            function ClearInputs() 
+            {
+                model.inputs.type = "";
+                model.inputs.number = "";
+                model.inputs.notifiedbody = "";
+                model.inputs.issueDate = "";
+                model.inputs.expiryDate = "";
+            }
+
+
+            // view
+
+            function updateView() 
             {
                 document.getElementById("app").innerHTML = mainPageHTML();
             }
 
-            function mainPageHTML()
+            function mainPageHTML() 
             {
                 return /*HTML*/ `
                     <h1>Certificates</h1>
 
-                    <input placeholder="Type" oninput="model.inputs.type = this.value; console.log(model.inputs.type);">
-                    <input placeholder="Number" oninput="model.inputs.number = this.value; console.log(model.inputs.number.toString());">
-                    <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value; console.log(model.inputs.notifiedbody);">
-                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value; console.log(model.inputs.issueDate);">
-                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.expiryDate = this.value; console.log(model.inputs.expiryDate);">
-
+                    <input placeholder="Type" oninput="model.inputs.type = this.value">
+                    <input placeholder="Number" oninput="model.inputs.number = this.value">
+                    <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value">
+                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value">
+                    <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.expiryDate = this.value">
+                    <br>
+                    <input id="fileInput" type="file" placeholder="Upload certificate">
                     <button onclick="SubmitAll()">Submit</button>
 
                     <br>
@@ -62,73 +136,29 @@
                     <input placeholder="Certificate number" oninput="model.searchByNumber = this.value">
                     <button onclick="SearchByNumber()">Search by number</button>
                     <br>
-                    ${renderSearchResults()}
+                    ${(model.searchByType == "" && model.searchByNumber == "") ? renderFullCertList() : renderSearchResults() }
                 `;
             }
 
-            async function SearchByType()
+
+            function renderFullCertList() 
             {
-                const response = await axios.get("/api/searchtype", { params: { type: model.searchByType } } );
-                model.searchResults = response.data;
-                updateView();
+                return model.fullCertificateList.map(cert => CertListHtml(cert)).join("");
             }
 
-            async function SearchByNumber()
+
+            function renderSearchResults() 
             {
-                const response = await axios.get("/api/searchnumber", { params: { number: model.searchByNumber } } );
-                model.searchResults = response.data;
-                updateView();
+                return model.searchResults.map(cert => CertListHtml(cert)).join("");
             }
 
-            function ClearSearches()
+            function CertListHtml(cert)
             {
-                model.searchByType = "";
-                model.searchByNumber = -1;
-            }
-
-            function renderSearchResults()
-            {
-                return model.searchResults.map(cert => `
+                return `
                     <div>
-                        ${cert.type} - ${cert.number}
+                        ${cert.type} - ${cert.number} - ${cert.notifiedBody} - ${cert.issueDate} - ${cert.expiryDate}
                     </div>
-                `).join("");
-            }
-
-            function SubmitAll()
-            {
-                if (InvalidInput())
-                {
-                    alert("All fields must be filled in.");
-                    return;
-                }
-
-                const cert = 
-                {
-                    type: model.inputs.type,
-                    number: model.inputs.number,
-                    notifiedBody: model.inputs.notifiedbody,
-                    issueDate: model.inputs.issueDate,
-                    expiryDate: model.inputs.expiryDate,
-                }
-
-                PostData(cert);
-                ClearInputs();
-                updateView();
-            }
-
-            function InvalidInput()
-            {
-                return model.inputs.type == "" || model.inputs.number == null || model.inputs.notifiedbody == "" || model.inputs.issueDate == "" || model.inputs.expiryDate == "";
-            }
-
-            function ClearInputs()
-            {
-                model.inputs.type = "";
-                model.inputs.number = null;
-                model.inputs.notifiedbody = "";
-                model.inputs.issueDate = "";
-                model.inputs.expiryDate = "";
+                `;
             }
 
         </script>

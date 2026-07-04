@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj": {}
+    "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj": {}
   },
   "projects": {
-    "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj": {
+    "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj",
+        "projectUniqueName": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj",
         "projectName": "CertAPI",
-        "projectPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/CertAPI.csproj",
+        "projectPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/CertAPI.csproj",
         "packagesPath": "/home/erikthon/.nuget/packages/",
-        "outputPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/obj/",
+        "outputPath": "/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/erikthon/.nuget/NuGet/NuGet.Config"

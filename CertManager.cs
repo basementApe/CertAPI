@@ -10,7 +10,7 @@ namespace CertAPI
         }
 
 
-        public List<Certificate> GetByNumber(int number)
+        public List<Certificate> GetByNumber(string number)
         {
             return _repo.LoadCerts().Where(c => c.Number == number).ToList();
         }
