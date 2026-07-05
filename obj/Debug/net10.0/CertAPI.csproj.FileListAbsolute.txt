@@ -78,8 +78,8 @@
 /home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/obj/Debug/net10.0/ref/CertAPI.dll
 /home/erikthon/Documents/GetAcademy/jtr/CertAPIDB/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-ook14jy25o-ook14jy25o.gz
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/bin/Debug/net10.0/Dapper.dll
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-tbx3n796uh-tbx3n796uh.gz
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/bin/Debug/net10.0/certifications.json
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/3fmxtkyvh4-{0}-687or0hb2g-687or0hb2g.gz
 /home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/ksqggtpxzm-{0}-nz0l9n78e0-nz0l9n78e0.gz
-/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/75kgeqddb1-{0}-j93hfnxkuh-j93hfnxkuh.gz
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/7nr0pe0elg-{0}-im828tdae0-im828tdae0.gz
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/lrnpxl7585-{0}-w75isz03rp-w75isz03rp.gz
+/home/erikthon/Documents/GetAcademy/jtr/CertAPI/obj/Debug/net10.0/compressed/75kgeqddb1-{0}-rkpnx9v414-rkpnx9v414.gz

@@ -9,7 +9,15 @@ function mainPageHTML()
     return /*HTML*/ `
         <h2>Certifications</h2>
 
-        <input placeholder="Type" oninput="model.inputs.type = this.value">
+        <div class="dropdown">
+            <button id="selectType">${model.inputs.type === '' ? 'Type' : model.inputs.type}</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="model.inputs.type='Declaration of conformity'; updateView(); ">Declaration of conformity</a>
+                <a href="#" onclick="model.inputs.type='Green passport'; updateView(); ">Green passport</a>
+                <a href="#" onclick="model.inputs.type='Type approval'; updateView(); ">Type approval</a>
+                <a href="#" onclick="model.inputs.type='Product certificate'; updateView(); ">Product certificate</a>
+            </div>
+        </div>
         <input placeholder="Number" oninput="model.inputs.number = this.value">
         <input placeholder="Notified body" oninput="model.inputs.notifiedbody = this.value">
         <input type="date" placeholder="YYYY-MM-DD" oninput="model.inputs.issueDate = this.value">
