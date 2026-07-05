@@ -32,21 +32,41 @@ function mainPageHTML()
 
 function renderFullCertList() 
 {
-    return model.fullCertificationList.map(cert => CertListHtml(cert)).join("");
+    return renderCertTable(model.fullCertificationList);
 }
-
 
 function renderSearchResults() 
 {
-    return model.searchResults.map(cert => CertListHtml(cert)).join("");
+    return renderCertTable(model.searchResults);
 }
 
-function CertListHtml(cert) 
-{
+function renderCertTable(certs) {
     return `
-        <div>
-            ${cert.type} - ${cert.number} - ${cert.notifiedBody} - ${cert.issueDate} - ${cert.expiryDate}
-            <button onclick="downloadCert('${cert.number}')">Download</button>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Number</th>
+                    <th>Notified body</th>
+                    <th>Issue date</th>
+                    <th>Expiry date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${certs.map(cert => `
+                    <tr>
+                        <td>${cert.type}</td>
+                        <td>${cert.number}</td>
+                        <td>${cert.notifiedBody}</td>
+                        <td>${cert.issueDate}</td>
+                        <td>${cert.expiryDate}</td>
+                        <td><button onclick="downloadCert('${cert.number}')">Download</button></td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
     `;
 }
+
+
