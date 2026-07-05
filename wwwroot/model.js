@@ -14,6 +14,6 @@ var model =
 
     searchResults: [],
 
-    fullCertificateList: [],
+    fullCertificationList: [],
 }
 

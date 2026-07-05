@@ -1,8 +1,0 @@
-når du bruker aspnetcore så blir det web-applikasjonen din returnerer (via MapGet()) automatisk konvertert til json.
-
-aspnetcore er et bibliotek - en samling C# kode, klasser osv som man kan bruke i programmet sitt for å lage APIer.
-WebApplication er også en del av et bibliotek, formodentlig aspnetcore men jeg er ikke helt sikker på akkurat det.
-
-Et API er (også?) en web-server.
-
-

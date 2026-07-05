@@ -1,7 +1,7 @@
 
 namespace CertAPI
 {
-    public class Certificate
+    public class Certification
     {
         public string Type { get; private set; }
         public string Number { get; private set; }
@@ -10,7 +10,7 @@ namespace CertAPI
         public DateOnly ExpiryDate { get; private set; }
         public string StoredFileName { get; private set; }
 
-        public Certificate(string type, string number, string notifiedbody, DateOnly issuedate, DateOnly expirydate, string storedfilename)
+        public Certification(string type, string number, string notifiedbody, DateOnly issuedate, DateOnly expirydate, string storedfilename)
         {
             Type = type;
             Number = number;

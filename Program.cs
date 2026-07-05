@@ -2,8 +2,7 @@ using CertAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ICertificateRepo, JsonCertificateRepo>();     // Change to SQL or something later
-builder.Services.AddSingleton<CertManager>();
+builder.Services.AddSingleton<ICertRepo, JsonCertRepo>();     // Change to SQL or something later
 
 // builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -18,17 +17,17 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapGet("/api/completelist", (ICertificateRepo repo) => 
+app.MapGet("/api/completelist", (ICertRepo repo) => 
 {
     return repo.LoadCerts();
 });
 
-// app.MapPost("/api/cert", (Certificate certificate, ICertificateRepo repo) =>
+// app.MapPost("/api/cert", (Certification certification, ICertRepo repo) =>
 // {
-//     repo.SaveCert(certificate);
-//     return Results.Created("/api/cert", certificate);
+//     repo.SaveCert(certification);
+//     return Results.Created("/api/cert", certification);
 // });
-app.MapPost("/api/cert", async (HttpRequest request, ICertificateRepo repo) =>
+app.MapPost("/api/cert", async (HttpRequest request, ICertRepo repo) =>
 {
     var form = await request.ReadFormAsync();
     var file = form.Files["file"];
@@ -41,19 +40,19 @@ app.MapPost("/api/cert", async (HttpRequest request, ICertificateRepo repo) =>
     using var stream = File.Create(path);
     await file.CopyToAsync(stream);
 
-    var certificate = new Certificate(form["type"]!, form["number"]!, form["notifiedBody"]!, DateOnly.Parse(form["issueDate"]!), DateOnly.Parse(form["expiryDate"]!), storedFileName);
+    var certification = new Certification(form["type"]!, form["number"]!, form["notifiedBody"]!, DateOnly.Parse(form["issueDate"]!), DateOnly.Parse(form["expiryDate"]!), storedFileName);
 
-    repo.SaveCert(certificate);
+    repo.SaveCert(certification);
 
-    return Results.Created("/api/cert", certificate);
+    return Results.Created("/api/cert", certification);
 });
 
-app.MapGet("/api/cert/{number}/download", (string number, ICertificateRepo repo) =>
+app.MapGet("/api/cert/{number}/download", (string number, ICertRepo repo) =>
 {
     var cert = repo.LoadCerts().FirstOrDefault(c => c.Number == number);
 
     if (cert == null)
-        return Results.NotFound("Certificate not found");
+        return Results.NotFound("Certification not found");
 
     var path = Path.Combine("Uploads", cert.StoredFileName);
 
@@ -65,22 +64,12 @@ app.MapGet("/api/cert/{number}/download", (string number, ICertificateRepo repo)
     return Results.File(fileBytes, "application/pdf", cert.Number + ".pdf");
 });
 
-// app.MapGet("/api/searchtype", (string type, CertManager manager) =>
-// {
-//     return manager.GetByType(type);
-// });
-
-// app.MapGet("/api/searchnumber", (string number, CertManager manager) =>
-// {
-//     return manager.GetByNumber(number);
-// });
-
-app.MapGet("/api/searchtype", (string type, ICertificateRepo repo) =>
+app.MapGet("/api/searchtype", (string type, ICertRepo repo) =>
 {
     return repo.LoadCerts().Where(c => c.Type.Contains(type, StringComparison.OrdinalIgnoreCase)).ToList();
 });
 
-app.MapGet("/api/searchnumber", (string number, ICertificateRepo repo) =>
+app.MapGet("/api/searchnumber", (string number, ICertRepo repo) =>
 {
     return repo.LoadCerts().Where(c => c.Number == number).ToList();
 });

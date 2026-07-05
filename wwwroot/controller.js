@@ -1,7 +1,7 @@
 async function GetData() 
 {
     const response = await axios.get("/api/completelist");
-    model.fullCertificateList = response.data;
+    model.fullCertificationList = response.data;
 }
 
 // async function PostData(cert) 
@@ -41,7 +41,7 @@ async function SubmitAll()
 
     if (!file) 
     {
-        alert("Please select a certificate file.");
+        alert("Please select a certification file.");
         return;
     }
 
