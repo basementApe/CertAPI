@@ -34,6 +34,8 @@ app.MapPost("/api/cert", async (HttpRequest request, ICertRepo repo) =>
     if (file == null)
         return Results.BadRequest("No file uploaded.");
 
+    Directory.CreateDirectory("Uploads");
+
     var storedFileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
     var path = Path.Combine("Uploads", storedFileName);
 
@@ -75,5 +77,6 @@ app.MapGet("/api/searchnumber", (string number, ICertRepo repo) =>
 });
 
 
+app.UseDefaultFiles();  // auto-serve wwwroot/index.html
 app.UseStaticFiles();   // enable html
 app.Run();
