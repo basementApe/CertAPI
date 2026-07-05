@@ -9,7 +9,7 @@ namespace CertAPI
         {
             if (!File.Exists(filename)) return new List<Certificate>();
             var json = File.ReadAllText(filename);
-            return JsonSerializer.Deserialize<List<Certificate>>(json);
+            return JsonSerializer.Deserialize<List<Certificate>>(json)!;
         }
 
         public void SaveCert(Certificate certificate)

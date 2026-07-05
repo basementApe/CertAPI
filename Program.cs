@@ -65,15 +65,26 @@ app.MapGet("/api/cert/{number}/download", (string number, ICertificateRepo repo)
     return Results.File(fileBytes, "application/pdf", cert.Number + ".pdf");
 });
 
-app.MapGet("/api/searchtype", (string type, CertManager manager) =>
+// app.MapGet("/api/searchtype", (string type, CertManager manager) =>
+// {
+//     return manager.GetByType(type);
+// });
+
+// app.MapGet("/api/searchnumber", (string number, CertManager manager) =>
+// {
+//     return manager.GetByNumber(number);
+// });
+
+app.MapGet("/api/searchtype", (string type, ICertificateRepo repo) =>
 {
-    return manager.GetByType(type);
+    return repo.LoadCerts().Where(c => c.Type.Contains(type, StringComparison.OrdinalIgnoreCase)).ToList();
 });
 
-app.MapGet("/api/searchnumber", (string number, CertManager manager) =>
+app.MapGet("/api/searchnumber", (string number, ICertificateRepo repo) =>
 {
-    return manager.GetByNumber(number);
+    return repo.LoadCerts().Where(c => c.Number == number).ToList();
 });
+
 
 app.UseStaticFiles();   // enable html
 app.Run();
