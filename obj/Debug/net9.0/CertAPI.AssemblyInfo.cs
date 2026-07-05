@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CertAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2568a6a7df1559bb18a7d4de1e4279d264f418ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17e911112cd38572cc3f7ffff0344e4b10c4070d")]
 [assembly: System.Reflection.AssemblyProductAttribute("CertAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CertAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
